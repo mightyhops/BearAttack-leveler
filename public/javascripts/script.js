@@ -1,15 +1,8 @@
 (function(){
 
-    //For js math and log. display happens in css
-    var rows = 30;
-    var columns = 29;
-    var mapElements = ["A", "B", "C"];
-
     $(document).ready(function(){
         squares = $('#squares');
-        input = $('#input');
         method = $('#method');
-        message = $('#message');
         save = $('#save');
 
         buildDefaultData(rows,columns);
@@ -23,18 +16,22 @@
 
     }); //end document ready
 
-
-    var dataElement = [];
-
+    
     //dom elements
     var squares;
-    var input;
     var method;
-    var mathTarget;
-    var message;
-    var blockSize;
-    var displayContent;
+    var save;
 
+    //For js math and log. display happens in css
+    var rows = 30;
+    var columns = 29;
+
+    //Layer elements and options
+    var dataElement = [];
+    var dataCollision = [];
+    var mapElements = ["G", "P", "W", "T", "H"];
+    var titleElements = ["Grass", "Path", "Water", "Tree", "House"];
+    var collideElement = false;
     var methods = {
         ELEMENTS: 0,
         COLLISIONS: 1
