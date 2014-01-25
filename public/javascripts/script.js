@@ -43,10 +43,12 @@
 
     function squareClick(){
         //console.log("Clicked " + this.innerHTML);
+          var currentRow = $(this).attr("row")
+          var currentCol = $(this).attr("col")
 
           if (parseInt(method.val()) == methods.ELEMENTS) {
             var currentElement = mapElements.indexOf(this.innerHTML);
-            this.innerHTML = mapElements[(currentElement + 1) % mapElements.length] 
+            dataElement[currentRow][currentCol] = mapElements[(currentElement + 1) % mapElements.length] 
             populateSquares(); }
 
           else if (parseInt(method.val()) == methods.COLLISIONS) {
@@ -77,7 +79,7 @@
         squares.empty();
         $(dataElement).each(function(index, element){
           $(this).each(function(index2, element2){
-            squares.append('<div class="square red hit' + dataCollision[index][index2] + '" row="'+index2+'" col="'+index+'" title="' + this + '">' + this + '</div>');
+            squares.append('<div class="square red hit' + dataCollision[index][index2] + '" row="'+index+'" col="'+index2+'" title="' + this + '">' + this + '</div>');
           });
         });
     }
