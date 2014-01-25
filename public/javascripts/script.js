@@ -10,13 +10,16 @@
         input = $('#input');
         method = $('#method');
         message = $('#message');
-        blockSize = $('#blocksize');
+        save = $('#save');
 
         buildDefaultData(rows,columns);
         populateSquares();
 
         //Attached onclick event to all squares
         squares.find(".square").click(squareClick);
+
+        //log the array to console
+        save.click(function(){console.log(dataElement)});
 
     }); //end document ready
 

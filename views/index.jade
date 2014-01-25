@@ -14,12 +14,15 @@ html
     .navbar-header
       a.navbar-brand(href="#") BearAttack-leveler
     .navbar-form
-      .col-md-1
+      .col-md-2
         select#method.form-control
           option(value=0)="Elements"
           option(value=1)="Collision"
-      .form-group.col-md-8
-        input#input.form-control(value="^(11)[47]$|^(13)[58]$|^(15)[69]$|2[2][0-2]|219|197|202")
+      .col-md-6
+        .input-group
+          input#input.form-control(value="Watch out for bears!")
+          span.input-group-btn
+            button#save.btn.btn-default Save
 
 block content
 
