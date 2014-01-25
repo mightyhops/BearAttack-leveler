@@ -46,14 +46,14 @@
           if (parseInt(method.val()) == methods.ELEMENTS) {
             var currentElement = mapElements.indexOf(this.innerHTML);
             dataElement[currentRow][currentCol] = mapElements[(currentElement + 1) % mapElements.length] 
-            populateSquares(); }
-
-          else if (parseInt(method.val()) == methods.COLLISIONS) {
-            if ($(this).hasClass('hit0')) {
-              $(this).addClass('hit1').removeClass('hit0'); }
-            else if ($(this).hasClass('hit1')) {
-              $(this).addClass('hit0').removeClass('hit1'); }
           }
+          else if (parseInt(method.val()) == methods.COLLISIONS) {
+            if (collideElement) {
+              dataCollision[currentRow][currentCol] = 0; }
+            else if (!collideElement) {
+              dataCollision[currentRow][currentCol] = 1; }
+          }
+          populateSquares(); 
 
     }
 
