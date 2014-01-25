@@ -16,7 +16,7 @@
         populateSquares();
 
         //Attached onclick event to all squares
-        squares.find(".square").click(squareClick);
+        $(squares).on("click", ".square", squareClick);
 
         //log the array to console
         save.click(function(){console.log(dataElement)});
@@ -42,10 +42,13 @@
 
 
     function squareClick(){
-        console.log("Clicked " + this.innerHTML);
+        //console.log("Clicked " + this.innerHTML);
+
           if (parseInt(method.val()) == methods.ELEMENTS) {
             var currentElement = mapElements.indexOf(this.innerHTML);
-            this.innerHTML = mapElements[(currentElement + 1) % mapElements.length] }
+            this.innerHTML = mapElements[(currentElement + 1) % mapElements.length] 
+            populateSquares(); }
+
           else if (parseInt(method.val()) == methods.COLLISIONS) {
             if ($(this).hasClass('hit0')) {
               $(this).addClass('hit1').removeClass('hit0'); }
@@ -74,7 +77,7 @@
         squares.empty();
         $(dataElement).each(function(index, element){
           $(this).each(function(index2, element2){
-            squares.append('<div class="square red hit' + dataCollision[index][index2] + '" title="' + this + '">' + this + '</div>');
+            squares.append('<div class="square red hit' + dataCollision[index][index2] + '" row="'+index2+'" col="'+index+'" title="' + this + '">' + this + '</div>');
           });
         });
     }
