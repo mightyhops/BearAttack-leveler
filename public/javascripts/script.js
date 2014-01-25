@@ -11,6 +11,9 @@
         //Attached onclick event to all squares
         $(squares).on("click", ".square", squareClick);
 
+        //Enable keyboard shortcuts for insertType changes
+        $(document).keyup(changeInsertType);
+
         //log the array to console
         save.click(function(){console.log(dataElement)});
 
@@ -36,16 +39,50 @@
         ELEMENTS: 0,
         COLLISIONS: 1
     };
+    var insertType;
 
 
-    function squareClick(){
-        //console.log("Clicked " + this.innerHTML);
-          var currentRow = $(this).attr("row")
-          var currentCol = $(this).attr("col")
+    function changeInsertType(event){
+      
+            switch(event.which){
+                case 71:
+                    insertType = "G";
+                    break;
+                case 80:
+                    insertType = "P";
+                    break;
+                case 87:
+                    insertType = "W";
+                    break;
+                case 84:
+                    insertType = "T";
+                    break;
+                case 72:
+                    insertType = "H";
+                    break;
+                default:
+                    insertType = "0";
+            }
+    }
+
+    function squareClick(evt){
+      
+      //console.log("Clicked " + this.innerHTML);
+      squareChange(evt);
+    }
+
+    function squareChange(evt){
+          var currentRow = $(evt.target).attr("row")
+          var currentCol = $(evt.target).attr("col")
 
           if (parseInt(method.val()) == methods.ELEMENTS) {
-            var currentElement = mapElements.indexOf(this.innerHTML);
-            dataElement[currentRow][currentCol] = mapElements[(currentElement + 1) % mapElements.length] 
+            if (insertType == "0") { 
+              var currentElement = mapElements.indexOf(evt.target.innerHTML);
+              dataElement[currentRow][currentCol] = mapElements[(currentElement + 1) % mapElements.length] 
+            }
+            else {
+              dataElement[currentRow][currentCol] = insertType;
+            }
           }
           else if (parseInt(method.val()) == methods.COLLISIONS) {
             if (collideElement) {
