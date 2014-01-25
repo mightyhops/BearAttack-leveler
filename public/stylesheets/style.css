@@ -39,10 +39,10 @@ h1 {
   -moz-border-radius: 12px;
   border-radius: 12px;
 }
-#squares .square.red {
+#squares .square.elP {
   background: #E80939;
 }
-#squares .square.green {
+#squares .square.elG {
   background: #12A106;
 }
 #squares .square.hidetext {
