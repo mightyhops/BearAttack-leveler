@@ -39,11 +39,20 @@ h1 {
   -moz-border-radius: 12px;
   border-radius: 12px;
 }
-#squares .square.elP {
-  background: #E80939;
-}
 #squares .square.elG {
-  background: #12A106;
+  background: #57C15C;
+}
+#squares .square.elP {
+  background: #F4BB95;
+}
+#squares .square.elW {
+  background: #35A1F8;
+}
+#squares .square.elT {
+  background: #006019;
+}
+#squares .square.elH {
+  background: #8B5240;
 }
 #squares .square.hidetext {
   color: transparent;
