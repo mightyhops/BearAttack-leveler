@@ -21,22 +21,6 @@ h1 {
   width: 1050px;
   margin: auto;
 }
-.loading {
-  background: url('http://www.hsi.com.hk/HSI-Net/pages/images/en/share/ajax-loader.gif') no-repeat right center;
-}
-.label.label-primary {
-  margin-top: 10px;
-  display: inline-block;
-}
-#verify-message {
-  width: 100%;
-  text-align: center;
-  font-size: 15px;
-  margin: 5px 0 10px 0;
-}
-#message.invalid {
-  color: red;
-}
 #squares {
   text-align: center;
 }
