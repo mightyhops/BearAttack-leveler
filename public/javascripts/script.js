@@ -1,5 +1,10 @@
 (function(){
 
+    //For js math and log. display happens in css
+    var rows = 30;
+    var columns = 29;
+    var mapElements = ["A", "B", "C"];
+
     $(document).ready(function(){
         squares = $('#squares');
         input = $('#input');
@@ -9,8 +14,16 @@
         blockSize = $('#blocksize');
         displayContent = $('#display-content');
 
-        buildDefaultData(rows*columns);
+        buildDefaultData(rows,columns);
         populateSquares();
+
+        //On square click, change current element
+        squares.find(".square").click(function(){
+          console.log("Clicked " + this.innerHTML);
+          currentElement = mapElements.indexOf(this.innerHTML);
+          this.innerHTML = mapElements[(currentElement + 1) % mapElements.length]
+          onInput();
+        });
 
         input.keyup(onInput);
         method.change(function(event){
@@ -31,25 +44,10 @@
                 case 'pixel':
                     rows = columns = 1050;
                     break;
-                case 'xsmall':
-                    rows = columns = 69;
-                    break;
-                case 'small':
-                    rows = columns = 41;
-                    break;
-                case 'medium':
-                    rows = columns = 15;
-                    break;
-                case 'large':
-                    rows = columns = 10;
-                    break;
-                case 'xlarge':
-                    rows = columns = 5;
-                    return;
                 default:
                     rows = columns = 30;
             }
-            buildDefaultData(rows*columns);
+            buildDefaultData(rows,columns);
             populateSquares();
             if(cssClass.length){
                 squares.find('.square').addClass(cssClass);
@@ -80,8 +78,6 @@
 
     var methods = {
         REGEX: 0,
-        MATH: 1,
-        BOOLEAN: 2,
         OEIS: 3
     };
 
@@ -91,58 +87,6 @@
             input: "",
             test: function(value){
                 return new RegExp(this.input).test(value);
-            }
-        }
-    }
-
-    function criteriaMath(){
-        return {
-            type: 1,
-            input: "",
-            targets: {
-                value:0,
-                index:1,
-                row:2,
-                column:3
-            },
-            target:0,
-            test: function(value, index, x, y){
-                var checkValue;
-                switch(this.target){
-                    case this.targets.index:
-                        checkValue = index;
-                        break;
-                    case this.targets.row:
-                        checkValue = y;
-                        break;
-                    case this.target.column:
-                        checkValue = x;
-                        break;
-                    case this.targets.value:
-                    default:
-                        checkValue = parseFloat(value);
-                        break;
-                }
-                var thisCriteria = this.input.replace(/n/g, index.toString());
-                thisCriteria = thisCriteria.replace(/x/g, value);
-                thisCriteria = thisCriteria.replace(/r/g, y);
-                thisCriteria = thisCriteria.replace(/c/g, x);
-                return eval(thisCriteria) === checkValue;
-            }
-        }
-    }
-
-    function criteriaBoolean(){
-        return {
-            type: 1,
-            input: "",
-            target: true,
-            test: function(value, index, x, y){
-                var thisCriteria = this.input.replace(/n/g, index.toString());
-                thisCriteria = thisCriteria.replace(/x/g, value);
-                thisCriteria = thisCriteria.replace(/r/g, y);
-                thisCriteria = thisCriteria.replace(/c/g, x);
-                return eval(thisCriteria) === this.target;
             }
         }
     }
@@ -157,9 +101,6 @@
         }
     }
 
-    //For js math and log. display happens in css
-    var rows = 30;
-    var columns = 29;
 
     var oesiTimeout;
 
@@ -168,10 +109,6 @@
         if(userInput.length){
             var criteria;
             switch(parseInt(method.val())){
-                case methods.MATH:
-                    criteria = criteriaMath();
-                    criteria.target = parseInt(mathTarget.val());
-                    break;
                 case methods.REGEX:
                 default:
                     criteria = criteriaRegex();
@@ -210,17 +147,23 @@
         message.removeClass('invalid').text(matches + ' matches');
     }
 
-    function buildDefaultData(length){
+    function buildDefaultData(rows,columns){
         data = [];
-        for(var i = 0; i < length; i++){
-            data.push(i + 1);
+        for(var i = 0; i < rows; i++){
+          row = [];
+          for(var j = 0; j < columns; j++){
+            row.push(mapElements[0]);
+          }
+          data.push(row);
         }
     }
 
     function populateSquares(){
         squares.empty();
         $(data).each(function(){
+          $(this).each(function(){
             squares.append('<div class="square red" title="' + this + '">' + this + '</div>');
+          });
         });
     }
 }());
