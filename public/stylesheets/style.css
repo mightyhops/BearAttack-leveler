@@ -32,6 +32,10 @@ h1 {
   font-size: 15px;
 }
 #squares .square.hit0 {
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+#squares .square.hit1 {
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
