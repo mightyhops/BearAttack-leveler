@@ -9,10 +9,8 @@
         squares = $('#squares');
         input = $('#input');
         method = $('#method');
-        mathTarget = $('#math-target');
         message = $('#message');
         blockSize = $('#blocksize');
-        displayContent = $('#display-content');
 
         buildDefaultData(rows,columns);
         populateSquares();
@@ -26,40 +24,7 @@
         });
 
         input.keyup(onInput);
-        method.change(function(event){
-            var advanced = $('#advanced');
-            advanced.removeClass('math');
-            if($(this).val() == methods.OEIS){
-                event.stopImmediatePropagation();
-            } else if($(this).val() == methods.MATH){
-                advanced.addClass('math');
-            }
-        });
         method.change(onInput);
-        mathTarget.change(onInput);
-        blockSize.change(function(){
-            displayContent.prop('checked', true);
-            var cssClass = blockSize.val();
-            switch(cssClass){
-                case 'pixel':
-                    rows = columns = 1050;
-                    break;
-                default:
-                    rows = columns = 30;
-            }
-            buildDefaultData(rows,columns);
-            populateSquares();
-            if(cssClass.length){
-                squares.find('.square').addClass(cssClass);
-            }
-        });
-        displayContent.click(function(){
-            if(displayContent.is(':checked')){
-                squares.find('.square').removeClass('hidetext');
-            } else {
-                squares.find('.square').addClass('hidetext');
-            }
-        });
 
 
         onInput({});
