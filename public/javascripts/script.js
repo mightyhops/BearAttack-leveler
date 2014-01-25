@@ -28,9 +28,9 @@
 
 
         onInput({});
-    });
+    }); //end document ready
 
-    var data = [];
+    var dataElement = [];
 
     //dom elements
     var squares;
@@ -113,21 +113,25 @@
     }
 
     function buildDefaultData(rows,columns){
-        data = [];
+        dataElement = [];
+        dataCollision = [];
         for(var i = 0; i < rows; i++){
-          row = [];
+          elementRow = [];
+          collisionRow = [];
           for(var j = 0; j < columns; j++){
-            row.push(mapElements[0]);
+            elementRow.push(mapElements[0]);
+            collisionRow.push(0);
           }
-          data.push(row);
+          dataElement.push(elementRow);
+          dataCollision.push(collisionRow);
         }
     }
 
     function populateSquares(){
         squares.empty();
-        $(data).each(function(){
-          $(this).each(function(){
-            squares.append('<div class="square red" title="' + this + '">' + this + '</div>');
+        $(dataElement).each(function(index, element){
+          $(this).each(function(index2, element2){
+            squares.append('<div class="square red hit' + dataCollision[index][index2] + '" title="' + this + '">' + this + '</div>');
           });
         });
     }

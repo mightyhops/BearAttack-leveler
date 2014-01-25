@@ -31,6 +31,10 @@ h1 {
   display: inline-block;
   font-size: 15px;
 }
+#squares .square.hit0 {
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
 #squares .square.red {
   background: #E80939;
 }
