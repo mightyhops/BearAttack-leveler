@@ -45,28 +45,9 @@
                     break;
                 case 'xlarge':
                     rows = columns = 5;
-                    break;
-                case 'spiral':
-                    input.addClass('loading');
-                    $.ajax({
-                        type: "GET",
-                        url: "/spiral",
-                        dataType: "json",
-                        success: function(smartResults){
-                            input.removeClass('loading');
-                            console.log("AJAX", smartResults);
-                            data = smartResults;
-                            rows = columns = 21;
-                            populateSquares();
-                        },
-                        error: function(error){
-                            input.removeClass('loading');
-                            throw "Ajax error!";
-                        }
-                    });
                     return;
                 default:
-                    rows = columns = 21;
+                    rows = columns = 30;
             }
             buildDefaultData(rows*columns);
             populateSquares();
@@ -176,8 +157,9 @@
         }
     }
 
-    var rows = 21;
-    var columns = 21;
+    //For js math and log. display happens in css
+    var rows = 30;
+    var columns = 29;
 
     var oesiTimeout;
 
@@ -190,40 +172,6 @@
                     criteria = criteriaMath();
                     criteria.target = parseInt(mathTarget.val());
                     break;
-                case methods.BOOLEAN:
-                    criteria = criteriaBoolean();
-                    break;
-                case methods.OEIS:
-
-                    criteria = {
-                        smartInput : userInput
-                    };
-                    if(oesiTimeout){
-                        clearTimeout(oesiTimeout);
-                    }
-                    var timeoutValue = (event.which == 13) ? 0 : 2000;
-                    oesiTimeout = setTimeout(function(){
-                        input.addClass('loading');
-                        $.ajax({
-                            type: "POST",
-                            url: "/smartGrab",
-                            data: criteria,
-                            dataType: "json",
-                            success: function(smartResults){
-                                input.removeClass('loading');
-                                console.log("AJAX", smartResults);
-                                var criteria = criteriaOEIS();
-                                criteria.input = smartResults;
-                                startVisualization(criteria);
-                            },
-                            error: function(error){
-                                input.removeClass('loading');
-                                throw "Ajax error!";
-                            }
-                        });
-                    }, timeoutValue);
-
-                    return;
                 case methods.REGEX:
                 default:
                     criteria = criteriaRegex();
