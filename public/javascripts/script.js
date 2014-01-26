@@ -4,6 +4,7 @@
         squares = $('#squares');
         method = $('#method');
         save = $('#save');
+        statusMsg = $('#statusMsg');
 
         buildDefaultData(rows,columns);
         populateSquares();
@@ -47,21 +48,27 @@
             switch(event.which){
                 case 71:
                     insertType = "G";
+                    $("#statusMsg").val("Mode: Grass");
                     break;
                 case 80:
                     insertType = "P";
+                    $("#statusMsg").val("Mode: Path");
                     break;
                 case 87:
                     insertType = "W";
+                    $("#statusMsg").val("Mode: Water");
                     break;
                 case 84:
                     insertType = "T";
+                    $("#statusMsg").val("Mode: Tree");
                     break;
                 case 72:
                     insertType = "H";
+                    $("#statusMsg").val("Mode: House");
                     break;
                 default:
                     insertType = "0";
+                    $("#statusMsg").val("Mode: Click to cycle");
             }
     }
 
