@@ -119,7 +119,7 @@
           $(this).each(function(index2, element2){
             var squareDivClass = '<div class="square el' + this[0] + ' hit' + dataCollision[index][index2] + '" ';
             var squareDivAttr  = 'row="'+index+'" col="'+index2+'" title="' + titleElements[mapElements.indexOf(this[0])] + '">';
-            var squareDivCont  = this + '</div>';
+            var squareDivCont  = '<div class="icon sprite-el'+ this[0]+ '" style="display: inline-block; margin-top: 8px"></div>';
             squares.append(squareDivClass + squareDivAttr + squareDivCont);
           });
         });

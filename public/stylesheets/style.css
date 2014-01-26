@@ -57,3 +57,34 @@ h1 {
 #squares .square.hidetext {
   color: transparent;
 }
+
+.icon {
+    background-image: url('/images/map1.gif');
+    display: block;
+}
+
+.icon.sprite-elG {
+    background-position: -32px -256px;
+    height: 16px; 
+    width: 16px; 
+}
+.icon.sprite-elP {
+    background-position: -80px -32px;
+    height: 16px; 
+    width: 16px; 
+}
+.icon.sprite-elW {
+    background-position: -80px -160px;
+    height: 16px; 
+    width: 16px; 
+}
+.icon.sprite-elT {
+    background-position: -48px -80px;
+    height: 16px; 
+    width: 16px; 
+}
+.icon.sprite-elH {
+    background-position: -80px -32px;
+    height: 16px; 
+    width: 16px; 
+}
