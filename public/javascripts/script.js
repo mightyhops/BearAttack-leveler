@@ -9,8 +9,12 @@
         buildDefaultData(rows,columns);
         populateSquares();
 
-        //Attached onclick event to all squares
-        $(squares).on("click", ".square", squareClick);
+        //Attached on click and hover events to all squares
+        var clickDown = false;
+        $(squares).on("mousedown", ".square", function(evt){ clickDown = true; console.log("cd"); squareChange(evt)});
+        $(squares).on("mouseenter", ".square:not(.icon)", function(evt){ console.log('me'); if (clickDown){ squareChange(evt); }});
+        $(squares).on("mouseup", ".square", function(evt){ clickDown = false; console.log("mu");  squareChange(evt);});
+        //$(squares).mousedown(squareClick)
 
         //Enable keyboard shortcuts for insertType changes
         $(document).keyup(changeInsertType);
@@ -40,7 +44,7 @@
         ELEMENTS: 0,
         COLLISIONS: 1
     };
-    var insertType = "0";
+    var insertType = "W";
 
 
     function changeInsertType(event){
@@ -67,16 +71,22 @@
                     $("#statusMsg").val("Mode: House");
                     break;
                 default:
-                    insertType = "0";
-                    $("#statusMsg").val("Mode: Click to cycle");
+                    insertType = "W";
+                    $("#statusMsg").val("Default Mode: Water");
             }
     }
 
-    function squareClick(evt){
-      
-      //console.log("Clicked " + this.innerHTML);
-      squareChange(evt);
-    }
+//    function squareClick(evt){
+//      squareChange(evt);
+//      var clickdown = true;
+//      console.log("clickdown: " + clickdown);
+//      $(squares).mouseup(function(){
+//        clickdown = false; 
+//        console.log("mouseup: " + clickdown);
+//        return;
+//      }) 
+//      //$(squares).hover(squareChange(evt));
+//    }
 
     function squareChange(evt){
           var currentRow = $(evt.target).attr("row") || $(evt.target).parent().attr("row")
@@ -84,7 +94,10 @@
 
           if (parseInt(method.val()) == methods.ELEMENTS) {
             if (insertType == "0") { 
-              incrDataElement(currentRow, currentCol);
+              //incrDataElement(currentRow, currentCol);
+              console.log("Forbidden insertType!");
+              insertType == "W";
+              dataElement[currentRow][currentCol] = insertType;
             }
             else {
               dataElement[currentRow][currentCol] = insertType;
@@ -99,11 +112,11 @@
           populateSquares(); 
     }
     
-    function incrDataElement(row, col){
-      var cElm = mapElements.indexOf(dataElement[row][col]);
-      var nElm = (cElm + 1) % mapElements.length;
-      dataElement[row][col] = mapElements[nElm] 
-    }
+//    function incrDataElement(row, col){
+//      var cElm = mapElements.indexOf(dataElement[row][col]);
+//      var nElm = (cElm + 1) % mapElements.length;
+//      dataElement[row][col] = mapElements[nElm] 
+//    }
 
     function buildDefaultData(rows,columns){
         dataElement = [];
