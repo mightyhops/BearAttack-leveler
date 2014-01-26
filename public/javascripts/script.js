@@ -77,8 +77,7 @@
 
           if (parseInt(method.val()) == methods.ELEMENTS) {
             if (insertType == "0") { 
-              var currentElement = mapElements.indexOf(evt.target.innerHTML);
-              dataElement[currentRow][currentCol] = mapElements[(currentElement + 1) % mapElements.length] 
+              incrDataElement(currentRow, currentCol);
             }
             else {
               dataElement[currentRow][currentCol] = insertType;
@@ -91,7 +90,12 @@
               dataCollision[currentRow][currentCol] = 1; }
           }
           populateSquares(); 
-
+    }
+    
+    function incrDataElement(row, col){
+      var cElm = mapElements.indexOf(dataElement[row][col]);
+      var nElm = (cElm + 1) % mapElements.length;
+      dataElement[row][col] = mapElements[nElm] 
     }
 
     function buildDefaultData(rows,columns){
