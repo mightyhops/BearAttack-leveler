@@ -12,8 +12,8 @@
         //Attached on click and hover events to all squares
         var clickDown = false;
         $(squares).on("mousedown", ".square", function(evt){ clickDown = true; console.log("cd"); squareChange(evt)});
-        $(squares).on("mouseenter", ".square:not(.icon)", function(evt){ console.log('me'); if (clickDown){ squareChange(evt); }});
-        $(squares).on("mouseup", ".square", function(evt){ clickDown = false; console.log("mu");  squareChange(evt);});
+        $(squares).on("mouseleave", ".square:not(.icon)", function(evt){ console.log('me'); if (clickDown){ squareChange(evt); }});
+        $(squares).on("mouseup", ".square", function(evt){ clickDown = false; console.log("mu");  });
         //$(squares).mousedown(squareClick)
 
         //Enable keyboard shortcuts for insertType changes
@@ -104,10 +104,12 @@
             }
           }
           else if (parseInt(method.val()) == methods.COLLISIONS) {
-            if (collideElement) {
-              dataCollision[currentRow][currentCol] = 0; }
-            else if (!collideElement) {
-              dataCollision[currentRow][currentCol] = 1; }
+            if (dataCollision[currentRow][currentCol] == 0) {
+              dataCollision[currentRow][currentCol] = 1;
+              }
+            else if (dataCollision[currentRow][currentCol] == 1) {
+              dataCollision[currentRow][currentCol] = 0; 
+              }
           }
           populateSquares(); 
     }
