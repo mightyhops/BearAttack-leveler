@@ -39,7 +39,7 @@
         ELEMENTS: 0,
         COLLISIONS: 1
     };
-    var insertType;
+    var insertType = "0";
 
 
     function changeInsertType(event){
@@ -72,8 +72,8 @@
     }
 
     function squareChange(evt){
-          var currentRow = $(evt.target).attr("row")
-          var currentCol = $(evt.target).attr("col")
+          var currentRow = $(evt.target).attr("row") || $(evt.target).parent().attr("row")
+          var currentCol = $(evt.target).attr("col") || $(evt.target).parent().attr("col")
 
           if (parseInt(method.val()) == methods.ELEMENTS) {
             if (insertType == "0") { 
